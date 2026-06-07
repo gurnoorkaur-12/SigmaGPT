@@ -1,0 +1,72 @@
+.recents{
+    margin: 1rem 0;
+    background-color: black;
+    width: 100%;
+    height: 90%;
+}
+.history{
+    margin: 1rem 0.5rem;
+    list-style: none;
+    margin:1rem 5px;
+}
+.history li{
+    height: 1.8rem;
+    margin: 1px;
+    object-fit: contain;
+    padding: 6px 10px;
+}
+.history li:hover{
+    background-color: #2d2d2dc3;
+    border-radius: 1rem;
+}
+.history li:active {
+    background-color: #2f2f2f;
+}
+.history li a{
+    text-decoration: none;
+    color: white;
+}
+
+.user{
+    position: sticky;
+    bottom: 0;
+    height: 8%;
+} */
+.Sidebar{
+    width: 15%;
+    height: 100%;
+    display: flex;
+    overflow-y: scroll;
+    font-size:14px;
+    flex-direction: column;
+    scrollbar-width:thin;
+    scrollbar-color: white black;
+    justify-content: space-between;
+    box-shadow: -1px 0px 1px 1px;
+}
+.logo{
+    height: 1.6rem;
+    width: 1.6rem;
+    background-color: white;
+    object-fit:cover;
+    border-radius: 1rem;
+    margin: 12px;
+}
+
+.fa-pen-to-square{
+    color: white;
+    margin: 10px;
+}
+.newChat{
+    background-color: black;
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+

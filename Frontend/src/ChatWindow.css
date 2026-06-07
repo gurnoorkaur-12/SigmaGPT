@@ -1,0 +1,24 @@
+/* .ChatWindow{
+    height: 100%;
+    width: 80%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar{
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    height: 5%;
+    color: black;
+    padding: 10px;
+    font-weight: 600;
+    width:96%;
+    padding:10px 2%;
+} */
+.ChatWindow{
+    width: 85%;
+    height: 100%;
+}
