@@ -8,8 +8,9 @@ const MessageSchema = new Schema({
         required:true
     },
     parts:{
-        type:String,
-        
+        type:[{
+            text:String
+        }],  
     },
     timeStamp:{
         type:Date,

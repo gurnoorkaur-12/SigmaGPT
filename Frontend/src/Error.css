@@ -1,0 +1,45 @@
+.Error{
+    background-color: #181818;
+    width: 60%;
+    height: 70vh;
+    margin:13vh auto;
+    border-radius: 2rem;
+    transition:all 1.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 2vh;
+    align-items: center;
+}
+.Error:hover{
+    box-shadow: -1px 0px 8px 4px #212121;
+}
+
+.Error h1{
+    text-align: center;
+    height: max-content;
+    margin:1rem auto;
+    font-size: 8rem;
+    font-weight: 100
+
+}
+.Error h3{
+    text-align: center;
+    margin:1rem auto;
+    width: 80%
+}
+.Error button{
+    background-color: #212121;
+    outline: none;
+    border: none;
+    color: white;
+    height: 4rem;
+    border-radius: 1rem;
+    padding: 0.5rem 5rem;
+    font-size: medium;
+    /* transition:all 0.2s ease-in-out; */
+}
+.Error button:active{
+    background-color: #232323;
+    border: 2px solid white;
+}

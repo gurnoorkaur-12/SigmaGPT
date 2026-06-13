@@ -9,9 +9,14 @@ import router from "./routes/chat.js"
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(cors());
+app.use(cors(
+  { origin:"http://localhost:5173",
+    methods:['GET','POST','DELETE','PUT'],
+    credentials:true
+  }
+));
 
-app.use('/static', express.static(path.join(import.meta.dirname, '../FrontendR')));
+app.use('/static', express.static(path.join(import.meta.dirname, '../Frontend')));
 
 const port = 8080;
 const mongo_uri = process.env.MONGO_URI;
@@ -24,15 +29,16 @@ main()
 
 async function main(){
   await mongoose.connect(mongo_uri);
-  
-  app.listen(port,(req,res)=>{
-    console.log("app is listening to port "+port);
-  })
 }
+
+app.listen(port,(req,res)=>{
+  console.log("app is listening to port "+port);
+})
 
 app.use(router);
 
 app.use((err,req,res,next)=>{
+  console.log(err);
   let {statusCode=500 , message="Something went wrong"}= err;
   res.status(statusCode).send(message);
 })

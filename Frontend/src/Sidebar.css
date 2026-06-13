@@ -7,17 +7,27 @@
 .history{
     margin: 1rem 0.5rem;
     list-style: none;
-    margin:1rem 5px;
+    margin:1rem 1px;
 }
 .history li{
+    display: flex;
+    justify-content: space-between;
     height: 1.8rem;
-    margin: 1px;
-    object-fit: contain;
+    margin: 2px;
     padding: 6px 10px;
+    cursor: pointer;
+    align-content:center;
+    border-radius: 0.5rem;
 }
+
+.history li p{
+    white-space: nowrap;      
+    overflow: hidden;          
+    text-overflow: ellipsis; 
+}
+
 .history li:hover{
-    background-color: #2d2d2dc3;
-    border-radius: 1rem;
+    background-color: #181818;
 }
 .history li:active {
     background-color: #2f2f2f;
@@ -31,18 +41,23 @@
     position: sticky;
     bottom: 0;
     height: 8%;
-} */
+    background-color: inherit;
+}
 .Sidebar{
-    width: 15%;
-    height: 100%;
+    width: 20%;
     display: flex;
-    overflow-y: scroll;
-    font-size:14px;
+    box-sizing: border-box; 
     flex-direction: column;
-    scrollbar-width:thin;
-    scrollbar-color: white black;
     justify-content: space-between;
-    box-shadow: -1px 0px 1px 1px;
+    overflow-y: scroll;
+    position: fixed;
+    left: 0;
+    height: 100%;
+    font-size:14px;
+    scrollbar-width: thin;
+    scrollbar-color: #212121 black;
+    background-color: inherit;
+    border-right: 0.2px solid #ffffff4a;
 }
 .logo{
     height: 1.6rem;
@@ -58,7 +73,7 @@
     margin: 10px;
 }
 .newChat{
-    background-color: black;
+    background-color: inherit;
     width: 100%;
     height: max-content;
     display: flex;
@@ -68,5 +83,17 @@
     cursor: pointer;
     border: none;
     outline: none;
+}
+
+.fa-trash-can{
+    display: none;
+}
+
+li:hover .fa-trash-can{
+    display: inline-block;
+}
+
+.fa-trash-can:hover{
+    color: rgb(255, 115, 115) !important;
 }
 

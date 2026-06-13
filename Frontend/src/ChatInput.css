@@ -1,47 +1,51 @@
-/* .ChatInput{
+.ChatInput{
     background-color: #212121;
-    width: 100%;
-    border-radius: 1.5rem;
-    height: 10%;
-    display: flex;
+    width: 60%;
     position: fixed;
-    bottom: 14px;
-    justify-content: space-between;
-    margin-top: 8px;
-    box-sizing: border-box;
+    bottom: 2rem;
+    padding: 1rem;
+    border-radius: 1.2rem;
+    height:max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.ChatInput textarea{
+
+.ChatInput i:hover{
+    color: #c4c3c3;
+}
+
+.input{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.input textarea{
     background-color: inherit;
     margin:2px 2%;
+    margin-bottom: 0;
     width: 90%;
     outline: none !important;
     border: none !important;
     font-size: 14px;
-    padding: 0;
     overflow-y: scroll;
     scrollbar-color: #212121 #212121;
     color: white;
-    padding: 13px 2px;
     resize: none;
     box-sizing: border-box;
 }
-.ChatInput textarea::placeholder{
-    color: #c4c3c3;
-    font-size: 14px;
-}
-
-.ChatInput i{
-   margin:0 2%;
-   align-self: center;
-   background-color: inherit;
-}
-.ChatInput i:hover{
-    color: #c4c3c3;
-}
 .info{
+    position: fixed;
+    bottom: 2px;
+    background-color: aqua;
+    background-color: black !important;
+    width: inherit;
     text-align: center;
     font-size: x-small;
+    border-radius: 1.8rem;
     color: #c4c3c3;
-    background-color: inherit;
-    margin:1px 0;
-} */
+} 
+.input textarea ::placeholder{
+    align-items: center;
+}

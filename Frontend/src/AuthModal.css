@@ -1,0 +1,29 @@
+.authForm form input{
+    display: block;
+    padding: 8px;
+    width: 90%;
+    margin: 20px auto;
+    background-color: #181818;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+
+.authForm form input::placeholder{
+    background-color: #181818;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.authForm button{
+    margin: 2px 4px;
+    padding: 10px;
+    background-color: inherit;
+    border: none;
+    color: white;
+    background-color: #414141;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}

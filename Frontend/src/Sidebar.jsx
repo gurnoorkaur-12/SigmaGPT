@@ -4,10 +4,10 @@ import { useContext, useEffect } from "react";
 import {MyContext} from "./MyContext";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Sidebar(){
+export default function Sidebar({style}){
   const {
     allThreads , setAllThreads,currThreadId,  setCurrThreadId, newChat, setNewChat, reply, setReply
-    ,prompt, setPrompt
+    ,prompt, setPrompt,prevChats, setPrevChats,openSidebar,setOpenSidebar
   } = useContext(MyContext);
   
   const getAllThreads = async()=>{
@@ -36,6 +36,7 @@ export default function Sidebar(){
     setPrompt("");
     setReply(null);
     setCurrThreadId(uuidv4());
+    setPrevChats([]);
   }
 
   const deleteThread = async(id)=>{
@@ -49,16 +50,17 @@ export default function Sidebar(){
     }
   }
 
-  const changeThread = (id)=>{
-    axios
-      .get(`http://localhost:8080/api/thread/${id}`)
-        .then((res)=>{
-          setCurrThreadId(id);
-        }).catch((err)=>console.log(err));
+  const changeThread = async(id)=>{
+      setCurrThreadId(id);
+      const thread= await axios.get(`http://localhost:8080/api/thread/${id}`);
+      setNewChat(false);
+      setPrevChats(thread.data.history);
+      setPrompt("");
+      setReply(null);
   }
 
   return(
-    <section className="Sidebar" >
+    <section className="Sidebar" style={openSidebar ? {transform: "translateX(0)" , zIndex:"10",width:"30%"}:null}>
       <button onClick={createNewChat} className="newChat">
         <img src="./src/assets/logo.png" alt="SigmaGPT logo" className="logo"/>
         <i className="fa-solid fa-pen-to-square fa-lg"></i>
@@ -67,10 +69,12 @@ export default function Sidebar(){
         <ul className="history">
           {
             allThreads?.map((thread)=>(
-              <li key={thread.threadId} onClick={()=>changeThread(thread.threadId)} style={{display:"flex" , justifyContent:"space-between" , alignContent:"center"}}>
-                {thread.title}
-                <div>
-                  <i onClick={()=>{deleteThread(thread.threadId)}} className="fa-solid fa-trash-can fa-xs" style={{color:"rgb(255, 255, 255)"}}></i>
+              <li key={thread.threadId} 
+                style={currThreadId === thread.threadId ?{backgroundColor:"#2b2b2b"}:null}
+              >
+                <p onClick={()=>changeThread(thread.threadId)}>{thread.title}</p>
+                <div onClick={()=>deleteThread(thread.threadId)}>
+                  <i className="fa-solid fa-trash-can fa-sm" style={{color:"rgb(255, 255, 255)",marginLeft:"15px"}}></i>
                 </div>
               </li>
             ))
@@ -78,9 +82,7 @@ export default function Sidebar(){
         </ul>
       </div>
       <div className="user">
-        <div>
-          Username
-        </div>
+       Username
       </div>
     </section>
   )
