@@ -3,6 +3,7 @@ import axios from "axios";
 import { useContext, useEffect } from "react";
 import {MyContext} from "./MyContext";
 import { v4 as uuidv4 } from "uuid";
+import server from "../environment.js";
 
 export default function Sidebar({style}){
   const {
@@ -11,7 +12,7 @@ export default function Sidebar({style}){
   } = useContext(MyContext);
   
   const getAllThreads = async()=>{
-    const res = await axios.get("http://localhost:8080/api/thread")
+    const res = await axios.get(`${server}/api/thread`)
       try{
         setAllThreads(
           res.data.map((thread)=>(
@@ -41,7 +42,7 @@ export default function Sidebar({style}){
 
   const deleteThread = async(id)=>{
     try{
-      const res = await axios.delete(`http://localhost:8080/api/thread/${id}`);
+      const res = await axios.delete(`${server}/api/thread/${id}`);
       if(currThreadId == res.data.threadId){
         createNewChat();
       }
@@ -52,7 +53,7 @@ export default function Sidebar({style}){
 
   const changeThread = async(id)=>{
       setCurrThreadId(id);
-      const thread= await axios.get(`http://localhost:8080/api/thread/${id}`);
+      const thread= await axios.get(`${server}/api/thread/${id}`);
       setNewChat(false);
       setPrevChats(thread.data.history);
       setPrompt("");

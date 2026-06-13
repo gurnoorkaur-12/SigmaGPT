@@ -2,6 +2,7 @@ import "./ChatInput.css";
 import { useContext,useEffect,useRef } from "react";
 import axios from "axios";
 import { MyContext } from "./MyContext.jsx";
+import server from "../environment.js";
 
 export default function ChatInput(){
     const {
@@ -25,7 +26,7 @@ export default function ChatInput(){
         }
         setLoading(true);
         try{
-            const res = await axios.post("http://localhost:8080/api/chat",options)
+            const res = await axios.post(`${server}/api/chat`,options)
             setReply(res.data);
             setNewChat(false);
         }catch(e){
