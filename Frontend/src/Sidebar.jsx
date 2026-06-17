@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import {MyContext} from "./MyContext";
 import { v4 as uuidv4 } from "uuid";
 import server from "../environment.js";
-import logo from '../assets/logo.png'
+import logo from './assets/logo.png'
 
 export default function Sidebar({style}){
   const {
