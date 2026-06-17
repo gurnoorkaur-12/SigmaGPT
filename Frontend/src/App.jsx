@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import './App.css';
 import Sidebar from './Sidebar.jsx';
 import { ErrorBoundary, getErrorMessage } from "react-error-boundary";
@@ -7,6 +7,8 @@ import ChatWindow from './ChatWindow.jsx';
 import {MyContext} from './MyContext.jsx';
 import { v4 as uuidv4 } from "uuid";
 import AuthModal from "./AuthModal.jsx";
+import { ToastContainer, Slide } from 'react-toastify';
+import { useCookies } from "react-cookie";
 
 function App() {
   const [allThreads,setAllThreads] = useState([]);
@@ -18,7 +20,11 @@ function App() {
   const [prevChats,setPrevChats] = useState([]);
   const [openSidebar,setOpenSidebar] = useState(false);
   const [openSignin,setOpenSignin] = useState(false);
-  const [ openLogin,setOpenLogin] = useState(false);
+  const [openLogin,setOpenLogin] = useState(false);
+  const [cookies, removeCookie] = useCookies([]);
+  const [currUser,setCurrUser] = useState(null);
+  const [loggedIn,setLoggedIn] = useState(false);
+
 
   const values = {
     allThreads,setAllThreads,
@@ -30,13 +36,15 @@ function App() {
     prevChats,setPrevChats,
     openSidebar,setOpenSidebar,
     openLogin,setOpenLogin,
-    openSignin,setOpenSignin
+    openSignin,setOpenSignin,
+    cookies, removeCookie,
+    currUser,setCurrUser,
+    loggedIn,setLoggedIn
   }
   
   const open = ()=>{
     setOpenSidebar(true);
   }
-
   return (
     <>
       <MyContext value={values}>
@@ -54,6 +62,19 @@ function App() {
           <ChatWindow/>
           <AuthModal open={openLogin} setOpen={setOpenLogin} title={"LOGIN"}/>
           <AuthModal open={openSignin} setOpen={setOpenSignin} title={"SIGN IN"}/>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition={Slide}
+            />
         </ErrorBoundary>
       </MyContext>
     </>

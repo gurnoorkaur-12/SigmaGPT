@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
@@ -38,6 +39,10 @@ const ThreadSchema = new Schema({
     updatedAt:{
         type:Date,
         default:Date.now
+    },
+    user:{
+        type:Schema.Types.ObjectId,
+        ref:"User"
     }
 })
 

@@ -8,11 +8,11 @@ import server from "../environment.js";
 export default function Sidebar({style}){
   const {
     allThreads , setAllThreads,currThreadId,  setCurrThreadId, newChat, setNewChat, reply, setReply
-    ,prompt, setPrompt,prevChats, setPrevChats,openSidebar,setOpenSidebar
+    ,prompt, setPrompt,prevChats, setPrevChats,openSidebar,setOpenSidebar,currUser
   } = useContext(MyContext);
   
   const getAllThreads = async()=>{
-    const res = await axios.get(`${server}/api/thread`)
+    const res = await axios.get(`${server}/api/v1/thread`,{withCredentials:true});
       try{
         setAllThreads(
           res.data.map((thread)=>(
@@ -42,7 +42,7 @@ export default function Sidebar({style}){
 
   const deleteThread = async(id)=>{
     try{
-      const res = await axios.delete(`${server}/api/thread/${id}`);
+      const res = await axios.delete(`${server}/api/v1/thread/${id}`);
       if(currThreadId == res.data.threadId){
         createNewChat();
       }
@@ -53,7 +53,7 @@ export default function Sidebar({style}){
 
   const changeThread = async(id)=>{
       setCurrThreadId(id);
-      const thread= await axios.get(`${server}/api/thread/${id}`);
+      const thread= await axios.get(`${server}/api/v1/thread/${id}`);
       setNewChat(false);
       setPrevChats(thread.data.history);
       setPrompt("");
@@ -63,7 +63,7 @@ export default function Sidebar({style}){
   return(
     <section className="Sidebar" style={openSidebar ? {transform: "translateX(0)" , zIndex:"10",width:"30%"}:null}>
       <button onClick={createNewChat} className="newChat">
-        <img src="./src/assets/logo.png" alt="SigmaGPT logo" className="logo"/>
+        <img src="/src/assets/logo.png" alt="SigmaGPT logo" className="logo"/>
         <i className="fa-solid fa-pen-to-square fa-lg"></i>
       </button>
       <div className="recents">
@@ -82,8 +82,8 @@ export default function Sidebar({style}){
           }
         </ul>
       </div>
-      <div className="user">
-       Username
+      <div className="user" style={{textAlign:"center",fontWeight:800,textTransform:"capitalize"}}>
+       {currUser}
       </div>
     </section>
   )

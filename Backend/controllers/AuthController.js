@@ -1,13 +1,17 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import createSecretToken from '../utils/SecretToken.js';
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 const signup = async(req,res,next)=>{
     const {email ,username, password} = req.body;
+    if(!email || !password || !username) return res.status(400).json({message:"All fields are required"});
 
     const existingUser = await User.findOne({email});
+
     if(existingUser){
-        return res.json({message:"User already exists"});
+        return res.status(302).json({message:"User already exists"});
     }
 
     const user = await new User({email, password, username});
@@ -26,20 +30,37 @@ const signup = async(req,res,next)=>{
 const login = async(req,res,next)=>{
     const {email,password} = req.body;
 
-    if(!email || !password) return res.json({message:"All fields are required"});
+    if(!email || !password) return res.status(400).json({message:"All fields are required"});
 
     const user = await User.findOne({email});
-    if(!user) return res.json({message:"incorrect password or email"});
+    if(!user) return res.status(404).json({message:"Incorrect password or email"});
 
     const auth = await bcrypt.compare(password,user.password);
-    if(!auth) return res.json({message:"Incorrect password or email"});
+    if(!auth) return res.status(401).json({message:"Incorrect password or email"});
 
     const token = createSecretToken(user._id);
+    
     res.cookie("token",token,{
         withCredentials:true,
         httpOnly:false
     }).status(201).json({message:"User logged in Successfully",success:true})
-
+    
 }
-
-export {signup,login};
+const userVerification = async(req,res,next)=>{
+    const token = req.cookies?.token
+    if (!token) {
+        return res.json({ status: false })
+    }
+    jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+        if (err) {
+            return res.json({ status: false })
+        } else {
+        const user = await User.findById(data.id)
+        if (user){
+            req.user = user;
+            return res.json({ status: true, user: user.username })
+        } else return res.json({ status: false })
+        }
+    })
+}
+export {signup,login,userVerification};

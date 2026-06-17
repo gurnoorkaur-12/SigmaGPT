@@ -12,3 +12,7 @@
   font-weight: 400;
   font-style: normal;
 }
+.Toastify__toast{
+  font-family: inherit;
+  font-weight: 600;
+}

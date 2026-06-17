@@ -2,7 +2,9 @@ import Thread from "../models/Thread.js";
 import getAPIResponse from "../utils/gemini.js";
 
 const getAllThreads = async(req,res)=>{
-    const threads = await Thread.find({}).sort({updatedAt:-1});
+    const user = req.user;
+    if(!user) return res.send([]);
+    const threads = await Thread.find({user:user._id}).sort({updatedAt:-1});
     res.send(threads);
 }
 
@@ -20,7 +22,8 @@ const deleteThread = async(req,res)=>{
 
 const sendChat = async(req,res)=>{
     let {message,threadId} = req.body;
-    
+    const user = req.user;
+    console.log(user);
     if(!threadId || !message){
         return res.status(400).json({error:"Error occurred"});
     }
@@ -36,7 +39,7 @@ const sendChat = async(req,res)=>{
         const title = message.split(" ").slice(0,30).join(" ");
         thread = await new Thread({
             threadId,
-            title
+            title,
         })
     }
     thread.history.push(
@@ -51,6 +54,7 @@ const sendChat = async(req,res)=>{
     )
 
     thread.updatedAt = Date.now();
+    if(user) thread.user = user;
     await thread.save();
     res.send(response);
 }

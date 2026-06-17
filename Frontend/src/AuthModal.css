@@ -1,29 +1,67 @@
 .authForm form input{
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     padding: 8px;
     width: 90%;
     margin: 20px auto;
-    background-color: #181818;
-    color: white;
-    border: none;
+    border: 1px solid #09153f;
     font-size: 1rem;
     border-radius: 0.5rem;
 }
 
 .authForm form input::placeholder{
-    background-color: #181818;
     height: 100%;
     width: 100%;
-    color: white;
 }
 
 .authForm button{
-    margin: 2px 4px;
+    /* margin: 2px 4px; */
     padding: 10px;
-    background-color: inherit;
     border: none;
-    color: white;
-    background-color: #414141;
+    color: rgb(255, 255, 255) !important;
     border-radius: 0.5rem;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: medium;
+    width: 94%;
+    background-color:#2f9244;
+}
+
+.switchAuthBtn{
+    background-color: #4983b3;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    color: white;
+    align-items: baseline;
+    margin: 20px auto;
+    padding: 9px;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+}
+.switchAuthBtn h5{
+    margin: 0;
+}
+
+.switchAuthBtn button{
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+    outline: none;
+    color: inherit;
+    border: none;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.switchAuthBtn button:hover{
+    color: #09153f;
+}
+
+@media(max-width:1000px){
+    .switchAuthBtn{
+        flex-direction: column;
+        align-items:center;
+        padding: 15px;
+    }
 }

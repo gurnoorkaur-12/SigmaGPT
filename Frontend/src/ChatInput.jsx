@@ -26,7 +26,7 @@ export default function ChatInput(){
         }
         setLoading(true);
         try{
-            const res = await axios.post(`${server}/api/chat`,options)
+            const res = await axios.post(`${server}/api/v1/chat`,options,{withCredentials:true})
             setReply(res.data);
             setNewChat(false);
         }catch(e){

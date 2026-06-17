@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-
+import cookieParser from "cookie-parser";
 import router from "./routes/chat.js"
 
 const app = express();
@@ -15,7 +15,7 @@ app.use(cors(
     credentials:true
   }
 ));
-
+app.use(cookieParser());
 app.use('/static', express.static(path.join(import.meta.dirname, '../Frontend')));
 
 const port = 8080;
@@ -35,7 +35,7 @@ app.listen(port,(req,res)=>{
   console.log("app is listening to port "+port);
 })
 
-app.use(router);
+app.use("/api/v1",router);
 
 app.use((err,req,res,next)=>{
   console.log(err);
