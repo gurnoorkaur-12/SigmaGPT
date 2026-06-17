@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import {MyContext} from "./MyContext";
 import { v4 as uuidv4 } from "uuid";
 import server from "../environment.js";
+import logo from '../assets/logo.png'
 
 export default function Sidebar({style}){
   const {
@@ -63,7 +64,7 @@ export default function Sidebar({style}){
   return(
     <section className="Sidebar" style={openSidebar ? {transform: "translateX(0)" , zIndex:"10",width:"30%"}:null}>
       <button onClick={createNewChat} className="newChat">
-        <img src="/src/assets/logo.png" alt="SigmaGPT logo" className="logo"/>
+        <img src={logo} alt="SigmaGPT logo" className="logo"/>
         <i className="fa-solid fa-pen-to-square fa-lg"></i>
       </button>
       <div className="recents">

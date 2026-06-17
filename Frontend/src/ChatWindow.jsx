@@ -30,7 +30,7 @@ export default function ChatWindow(){
                 return;
             }
             const { data } = await axios.post(
-                "http://localhost:8080/api/v1",
+                `${server}/api/v1`,
                 {},
                 { withCredentials: true }
             );
