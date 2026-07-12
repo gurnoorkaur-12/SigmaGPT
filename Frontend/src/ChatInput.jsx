@@ -8,7 +8,7 @@ export default function ChatInput(){
     const {
         prompt ,setPrompt, reply, setReply, loading, setLoading,
         currThreadId,setCurrThreadId, newChat, setNewChat,prevChats,
-        setPrevChats
+        setPrevChats,loggedIn,currUser
     } = useContext(MyContext);
 
     let hasTriggered = useRef(false);
@@ -25,17 +25,32 @@ export default function ChatInput(){
             threadId:currThreadId
         }
         setLoading(true);
-        try{
-            const res = await axios.post(`${server}/api/v1/chat`,options,{withCredentials:true})
-            setReply(res.data);
-            setNewChat(false);
-        }catch(e){
-            console.log(e);
+        if(currUser == null) {
+            try{
+                const res = await axios.post(`${server}/api/v1/answer`,options);
+                setReply(res.data);
+                setNewChat(false);
+            }catch(er){
+                console.log(er);
+            }
+        }else{
+            try{
+                const res = await axios.post(`${server}/api/v1/chat`,options,{withCredentials:true})
+                setReply(res.data);
+                setNewChat(false);
+            }catch(e){
+                console.log(e);
+            }
         }
+       
         setLoading(false);
     }
 
     useEffect(()=>{
+        if(newChat) {
+            setPrevChats([]);
+            return;
+        }
         if(prompt && reply){
             setPrevChats((prevChats)=>(
                 [

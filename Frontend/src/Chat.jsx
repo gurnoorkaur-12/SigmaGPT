@@ -33,6 +33,8 @@ export default function Chat(){
         }
     },[prevChats,reply])
 
+
+    console.log(prevChats)
     return(
         <section className="Chat">            
             {
@@ -41,30 +43,32 @@ export default function Chat(){
                     <h1 style={{height:"8rem",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"space-between",marginTop:"8rem"}}>
                         What's on your mind today?
                     </h1>
-                </div> : null
-            }
-            {
-                prevChats.slice(0,-1).map((chat,idx)=>
-                    <div className={chat.role === "user" ? "prompt":"reply"} key={idx}>
-                        <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{chat.parts[0].text}</ReactMarkdown>
-                    </div>
-                )
-            }
-            {
-                prevChats.length > 0 ?
-                    latestReply === null ? (
-                            <div className="reply" key={"non-typing"}>
-                                <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{prevChats[prevChats.length-1].parts[0].text}</ReactMarkdown>
-                            </div>
-                        ):(
-                            <div className="reply" key={"typing"}>
-                                <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{latestReply}</ReactMarkdown>
+                </div>
+                :
+                    <>
+                    {
+                        prevChats.slice(0,-1).map((chat,idx)=>
+                            <div className={chat.role === "user" ? "prompt":"reply"} key={idx}>
+                                <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{chat.parts[0].text}</ReactMarkdown>
                             </div>
                         )
-                    : null
+                    }
+                    {
+                    prevChats.length > 0 ?
+                        latestReply === null ? (
+                                <div className="reply" key={"non-typing"}>
+                                    <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{prevChats[prevChats.length-1].parts[0].text}</ReactMarkdown>
+                                </div>
+                            ):(
+                                <div className="reply" key={"typing"}>
+                                    <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{latestReply}</ReactMarkdown>
+                                </div>
+                            )
+                        : null}
+                    </>
 
             }
-
+           
             <ScaleLoader color={"white"} loading={loading} style={{width:"100%",display:"inline-block",textAlign:"center",marginBottom:"2rem"}}/>
 
         </section>

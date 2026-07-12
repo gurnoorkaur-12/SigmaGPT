@@ -8,6 +8,8 @@ import {MyContext} from './MyContext.jsx';
 import { v4 as uuidv4 } from "uuid";
 import AuthModal from "./AuthModal.jsx";
 import { ToastContainer, Slide } from 'react-toastify';
+import axios from "axios";
+import server from '../environment.js'; 
 import { useCookies } from "react-cookie";
 
 function App() {
@@ -24,6 +26,22 @@ function App() {
   const [cookies, removeCookie] = useCookies([]);
   const [currUser,setCurrUser] = useState(null);
   const [loggedIn,setLoggedIn] = useState(false);
+  const verifyCookie = async () => {
+      if (!cookies.token) {
+          return null;
+      }
+      const { data } = await axios.post(
+          `${server}/api/v1`,
+          {},
+          { withCredentials: true }
+      );
+      const { status, user } = data;
+      setCurrUser(user);
+      if(loggedIn) toast.success(`Hello ${user} :)`);
+      return status
+          ? null
+          : (removeCookie("token"));
+      };
 
 
   const values = {
@@ -39,7 +57,8 @@ function App() {
     openSignin,setOpenSignin,
     cookies, removeCookie,
     currUser,setCurrUser,
-    loggedIn,setLoggedIn
+    loggedIn,setLoggedIn,
+    verifyCookie
   }
   
   const open = ()=>{

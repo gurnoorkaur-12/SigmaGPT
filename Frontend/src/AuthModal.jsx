@@ -11,8 +11,7 @@ import { MyContext } from './MyContext';
 import notify from './App.jsx';
 import axios from 'axios';
 import {toast,Bounce } from 'react-toastify';
-import server from '../environment.js';
-
+import server from '../environment.js'; 
 
 const style = {
   position: 'absolute',
@@ -38,7 +37,7 @@ export default function AuthModal({open,setOpen,title}) {
   const [username,setUsername] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
-  const {loggedIn,setLoggedIn,setNewChat,setAllThreads} = useContext(MyContext);
+  const {loggedIn,setLoggedIn,setNewChat,setAllThreads,verifyCookie} = useContext(MyContext);
 
   let handleAuth = async(event)=>{
     event.preventDefault();
@@ -63,7 +62,7 @@ export default function AuthModal({open,setOpen,title}) {
       if(res) {
         setNewChat(true);
         setAllThreads([]);
-        setLoggedIn(true);
+        verifyCookie();
       }
     }catch(err){
       console.log(err);

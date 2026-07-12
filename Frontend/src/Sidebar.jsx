@@ -13,6 +13,10 @@ export default function Sidebar({style}){
   } = useContext(MyContext);
   
   const getAllThreads = async()=>{
+    if(currUser == null) {
+      setAllThreads([]);
+      return;
+    }
     const res = await axios.get(`${server}/api/v1/thread`,{withCredentials:true});
       try{
         setAllThreads(
@@ -30,7 +34,7 @@ export default function Sidebar({style}){
   
   useEffect(()=>{
     getAllThreads();
-  },[allThreads])
+  },[currUser,currThreadId,newChat]);
 
 
   const createNewChat = ()=>{
