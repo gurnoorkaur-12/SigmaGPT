@@ -20,10 +20,19 @@ const deleteThread = async(req,res)=>{
     res.send(thread);
 }
 
+const getAns = async(req,res)=>{
+    let {message,threadId} = req.body;
+    if(!threadId || !message){
+        return res.status(400).json({error:"Error occurred"});
+    }
+    let response = await getAPIResponse(message);
+    res.send(response);
+
+}
+
 const sendChat = async(req,res)=>{
     let {message,threadId} = req.body;
     const user = req.user;
-    console.log(user);
     if(!threadId || !message){
         return res.status(400).json({error:"Error occurred"});
     }
@@ -65,4 +74,4 @@ const deleteAllThreads = async(req,res)=>{
     res.send(thread);
 }
 
-export {getAllThreads, getThread, deleteThread, sendChat, deleteAllThreads};
+export {getAllThreads, getThread, deleteThread, sendChat, deleteAllThreads, getAns};
