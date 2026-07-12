@@ -62,7 +62,7 @@ export default function AuthModal({open,setOpen,title}) {
       if(res) {
         setNewChat(true);
         setAllThreads([]);
-        verifyCookie();
+        const res = await verifyCookie();
       }
     }catch(err){
       console.log(err);

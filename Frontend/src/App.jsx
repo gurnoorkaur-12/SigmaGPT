@@ -36,8 +36,13 @@ function App() {
           { withCredentials: true }
       );
       const { status, user } = data;
-      setCurrUser(user);
-      if(loggedIn) toast.success(`Hello ${user} :)`);
+      if(loggedIn) {
+        toast.success(`Hello ${user} :)`);
+      }
+      if(status){
+        setLoggedIn(true);
+        setCurrUser(user);
+      }
       return status
           ? null
           : (removeCookie("token"));

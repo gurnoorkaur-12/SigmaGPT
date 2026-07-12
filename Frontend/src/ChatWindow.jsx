@@ -26,11 +26,10 @@ export default function ChatWindow(){
     }
 
     useEffect(() => {
-        let res = verifyCookie();
-        if(res == null) {
-            setCurrUser(null);
-            setLoggedIn(false);
+        const check = async()=>{
+            let res = await verifyCookie();
         }
+        check();
     }, [cookies]);
 
     const handleLogout = () => {
