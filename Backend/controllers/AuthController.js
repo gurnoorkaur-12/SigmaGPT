@@ -19,8 +19,9 @@ const signup = async(req,res,next)=>{
     const token = createSecretToken(user._id);
 
     res.cookie("token",token,{
-        withCredentials:true,
-        httpOnly:false
+        httpOnly:false,
+        secure:true,
+        sameSite:none,
     })
 
     await user.save();
@@ -41,8 +42,9 @@ const login = async(req,res,next)=>{
     const token = createSecretToken(user._id);
     
     res.cookie("token",token,{
-        withCredentials:true,
-        httpOnly:false
+        httpOnly:false,
+        secure:true,
+        sameSite:none,
     }).status(201).json({message:"User logged in Successfully",success:true})
     
 }

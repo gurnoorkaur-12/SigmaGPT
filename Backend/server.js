@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cors(
   { origin:"https://sigmagpt-frontend-1odj.onrender.com",
     methods:['GET','POST','DELETE','PUT'],
-    credentials:true
+    credentials:true,
   }
 ));
 app.use(cookieParser());
@@ -42,5 +42,3 @@ app.use((err,req,res,next)=>{
   let {statusCode=500 , message="Something went wrong"}= err;
   res.status(statusCode).send(message);
 })
-
-await main();

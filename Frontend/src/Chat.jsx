@@ -33,8 +33,6 @@ export default function Chat(){
         }
     },[prevChats,reply])
 
-
-    console.log(prevChats)
     return(
         <section className="Chat">            
             {
