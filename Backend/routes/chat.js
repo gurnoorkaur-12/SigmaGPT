@@ -39,7 +39,7 @@ router
 
 router
     .use((req,res)=>{
-        res.redirect("/thread");
+        res.redirect("api/v1/thread");
     });
 
 export default router;

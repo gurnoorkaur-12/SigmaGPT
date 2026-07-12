@@ -21,7 +21,7 @@ const signup = async(req,res,next)=>{
     res.cookie("token",token,{
         httpOnly:false,
         secure:true,
-        sameSite:none,
+        sameSite:"None",
     })
 
     await user.save();
@@ -44,7 +44,7 @@ const login = async(req,res,next)=>{
     res.cookie("token",token,{
         httpOnly:false,
         secure:true,
-        sameSite:none,
+        sameSite:"none",
     }).status(201).json({message:"User logged in Successfully",success:true})
     
 }
