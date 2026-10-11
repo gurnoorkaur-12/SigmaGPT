@@ -8,9 +8,10 @@ import router from "./routes/chat.js"
 
 const app = express();
 app.use(express.json());
+app.set("trust proxy", 1); 
 app.use(express.urlencoded({extended:true}));
 app.use(cors(
-  { origin:"http://localhost:5173",
+  { origin:"https://sigmagpt-backend-mypi.onrender.com",
     methods:['GET','POST','DELETE','PUT'],
     credentials:true,
   }

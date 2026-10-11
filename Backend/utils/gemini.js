@@ -12,7 +12,7 @@ async function getAPIRespone(message,history) {
     
   }
     const chat = ai.chats.create({
-      model: "gemini-3.5-flash",
+      model: "gemini-3.8-flash",
       history: history || []
     })
 

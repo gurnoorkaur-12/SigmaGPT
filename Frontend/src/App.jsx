@@ -11,6 +11,7 @@ import { ToastContainer, Slide } from 'react-toastify';
 import axios from "axios";
 import server from '../environment.js'; 
 import { useCookies } from "react-cookie";
+import { PropagateLoader } from "react-spinners";
 
 function App() {
   const [allThreads,setAllThreads] = useState([]);
@@ -26,6 +27,8 @@ function App() {
   const [cookies, removeCookie] = useCookies([]);
   const [currUser,setCurrUser] = useState(null);
   const [loggedIn,setLoggedIn] = useState(false);
+  const [auth,setAuth] = useState(false);
+
   const verifyCookie = async () => {
       if (!cookies.token) {
           return null;
@@ -63,6 +66,7 @@ function App() {
     cookies, removeCookie,
     currUser,setCurrUser,
     loggedIn,setLoggedIn,
+    auth,setAuth,
     verifyCookie
   }
   
@@ -84,6 +88,7 @@ function App() {
           </div>
           <Sidebar/>
           <ChatWindow/>
+          <PropagateLoader color="#71b6fbd2" loading={auth} style={{height:"200px",position:"fixed",top:"50%",left:"50%"}}/>
           <AuthModal open={openLogin} setOpen={setOpenLogin} title={"LOGIN"}/>
           <AuthModal open={openSignin} setOpen={setOpenSignin} title={"SIGN IN"}/>
           <ToastContainer

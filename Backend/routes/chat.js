@@ -37,9 +37,9 @@ router
     .route("/login")
         .post(wrapAsync(login));
 
-router
-    .use((req,res)=>{
-        res.redirect("api/v1/thread");
-    });
+// router
+//     .use((req,res)=>{
+//         res.redirect("api/v1/thread");
+//     });
 
 export default router;
