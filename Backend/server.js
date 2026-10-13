@@ -11,7 +11,7 @@ app.use(express.json());
 app.set("trust proxy", 1); 
 app.use(express.urlencoded({extended:true}));
 app.use(cors(
-  { origin:"https://sigmagpt-frontend-1odj.onrender.com/",
+  { origin:"https://sigmagpt-frontend-1odj.onrender.com",
     methods:['GET','POST','DELETE','PUT'],
     credentials:true,
   }
